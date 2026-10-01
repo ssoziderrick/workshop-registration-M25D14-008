@@ -47,23 +47,40 @@ form.addEventListener("submit", (event) => {
   }
 
   if (password.value.length < 10) {
-    password.setCustomValidity("Use at least 10 characters for this exercise.");
-  } else {
-    password.setCustomValidity("");
-  }
+  password.setCustomValidity("Use at least 10 characters for this exercise.");
+} else {
+  password.setCustomValidity("");
+}
+
+if (password.value !== confirmPassword.value) {
+  confirmPassword.setCustomValidity(
+    "The passwords must match."
+  );
+} else {
+  confirmPassword.setCustomValidity("");
+}
 
   // JS2: Compare password and confirmPassword with an if/else structure.
   // Set a custom validity message when they do not match, and clear it when they match.
 
   // JS3 TEMPORARY GUARD: Remove this entire block and replace it with reportValidity().
-  feedback.textContent = "Complete JS2 and JS3 before previewing a registration.";
+if (!form.reportValidity()) {
+  feedback.textContent =
+    "Check the highlighted fields and try again.";
   feedback.classList.add("error");
   feedback.hidden = false;
   return;
+}
 
   // JS4: Replace 0 with the numeric value from the seats control.
-  const seatCount = 0;
-  let bookingType = "";
+  const seatCount = seats.valueAsNumber;
+let bookingType = "";
+
+if (seatCount === 1) {
+  bookingType = "Individual booking";
+} else {
+  bookingType = "Group booking";
+}
   // Use if/else: one seat is an Individual booking; all other valid values are a Group booking.
 
   feedback.textContent = `${trimmedName}, your ${bookingType.toLowerCase()} for ${seatCount} seat${seatCount === 1 ? "" : "s"} in ${course.value} on ${sessionDate.value} is ready to preview.`;
