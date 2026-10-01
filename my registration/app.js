@@ -10,8 +10,18 @@ const confirmPassword = document.getElementById("confirmPassword");
 const feedback = document.getElementById("feedback");
 
 // JS1: Add the three workshop names, then create one <option> per workshop.
-const workshops = [];
+const workshops = [
+  "HTML Essentials",
+  "CSS Studio",
+  "JavaScript Lab"
+];
 // Write the JS1 for...of loop here.
+for (const workshop of workshops) {
+  const option = document.createElement("option");
+  option.value = workshop;
+  option.textContent = workshop;
+  course.appendChild(option);
+}
 
 function todayInLocalTime() {
   const now = new Date();
